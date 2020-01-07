@@ -2,3 +2,11 @@ build/
 .vscode/
 Testing/
 CMakeFiles/
+cmake_install*
+CMakeCache.txt
+CPack*
+CTest*
+*.tcl
+Makefile
+test2
+CMakeList*
