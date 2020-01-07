@@ -10,3 +10,4 @@ CTest*
 Makefile
 test2
 CMakeList*
+main.cpp
