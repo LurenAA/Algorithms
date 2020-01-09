@@ -1,9 +1,15 @@
+#ifndef __INSERT__H
+#define __INSERT__H
+
 #include <iostream>
 #include "Common.hpp"
 #include <vector>
 #include <algorithm>
 using namespace std;
 
+/**
+ * 插入排序
+ **/ 
 template<typename iterator>
 void Insertion(iterator b, iterator e) {
   int len = distance(b , e);
@@ -13,10 +19,4 @@ void Insertion(iterator b, iterator e) {
   }
 }
 
-int main(int argc, char** argv) {
-  Common* c = Common::getInstance();
-  vector<int> vec1 = c->getRandomVector(10);
-  Insertion(vec1.begin(), vec1.end());
-  c->show(vec1.begin(), vec1.end());
-  return 0;
-}
+#endif

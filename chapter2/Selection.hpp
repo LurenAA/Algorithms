@@ -1,9 +1,12 @@
+#pragma once
 #include <iostream>
 #include "Common.hpp"
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+/**
+ * 选择排序
+ **/ 
 template<typename T>
 void Selection(vector<T>& a)
 {
@@ -13,10 +16,3 @@ void Selection(vector<T>& a)
   }
 }
 
-int main(int argc, char** argv) {
-  Common* c = Common::getInstance();
-  vector<int> vec1 = c->getRandomVector(10);
-  Selection(vec1);
-  c->show(vec1.begin(), vec1.end());
-  return 1;
-}
