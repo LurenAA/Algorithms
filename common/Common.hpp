@@ -2,13 +2,14 @@
 #define __COMMON_HPP
 #include <vector>
 #include <iostream>
+#include <time.h>
 
 class Common {
   public:
   template<class iterator>
   void show(iterator,iterator) const;
 
-  std::vector<int> getRandomVector(int length, bool isSort = false) const; 
+  std::vector<int> getRandomVector(int length, uint_fast32_t  seed = time(NULL),bool isSort = false) const; 
   static Common* getInstance();
   private:
   Common() = default;
