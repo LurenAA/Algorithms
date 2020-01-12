@@ -2,7 +2,9 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+/**
+ * 自底向上归并排序
+ **/ 
 class Merge2 {
   public: 
     static void sort(vector<int> &);

@@ -4,7 +4,9 @@
 #include  <functional>
 #include "Insertion.hpp"
 using namespace std;
-
+/**
+ * 快速排序
+ **/ 
 class Quick {
   public:
     static void sort(vector<int>& a);
