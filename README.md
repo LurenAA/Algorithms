@@ -25,6 +25,7 @@
 &emsp;[索引最小优先队列](https://github.com/LurenAA/Algorithms/blob/master/chapter2/IndexMinPQ.cpp)<br />
 
 ### 第2章 查找
-&emsp;[二叉查找树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/BST.hpp)<br />
 &emsp;[链表](https://github.com/LurenAA/Algorithms/blob/master/chapter3/SequentialSearchST.hpp)<br />
 &emsp;[数组（二分查找）](https://github.com/LurenAA/Algorithms/blob/master/chapter3/BinarySearchST.hpp)<br />
+&emsp;[二叉查找树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/BST.hpp)<br />
+&emsp;[红黑树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/RedBlackBST.hpp)<br />
