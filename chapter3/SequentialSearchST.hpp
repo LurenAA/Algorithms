@@ -57,7 +57,7 @@ void SequentialSearchST<S,T>::put(S key, T val) {
 }
 
 template<typename S, typename T>
-void SequentialSearchST<S,T>::show() const {
+void SequentialSearchST<S,T>::show() const {  
   shared_ptr<Node> sk(head);
   while(sk) {
     cout << sk->key << " " << sk->val << endl;

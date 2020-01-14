@@ -1,3 +1,9 @@
+/*
+ * @Author: xiao gongbai 
+ * @Date: 2020-01-14 17:31:12 
+ * @Last Modified by: xiao gongbai
+ * @Last Modified time: 2020-01-15 03:03:40
+ */
 #pragma once
 #include <iostream>
 #include "Common.hpp"
@@ -18,299 +24,256 @@ class BST{
       T val;
       shared_ptr<Node> left, right;
       int N;
-      Node(const S&key, const T& val, int N) :
+      explicit Node(const S&key, const T& val, int N) :
         key(key), val(val), left(), right(), N(N) {}
-      int compareTo(shared_ptr<Node> node) const;
       int compareTo(const S&) const;
       static int Nsize(shared_ptr<Node> x);  
     };
     
-    const S min() const;
-    const S max() const;
+    S min() const;
+    S max() const;
     bool contain(const S&) const;
-    const T get(const S&) const;
+    T get(const S&) const;
+    #ifdef DEBUG
+    shared_ptr<Node> get(const S&, int) const; //测试用
+    #endif
     void put(const S& key, const T& val);
-    void show() const; //调试
-    const vector<S> keys() const;
-    const S floor(const S& key) const;
-    const S ceiling(const S&key) const;
-    const S select(int x) const;
-    const int rank(const T&) const;
-    void deleteMin();
-    void delet(const T& key);
+    int size() const {return root ? root->N : 0;}
+    vector<S> keys(const S& min , const S& max) const;
+    vector<S> keys() const;
+    S floor(const S& key) const;
+    S ceiling(const S&key) const;
+    // const S select(int x) const;
+    // const int rank(const T&) const;
+    // void deleteMin();
+    // void delet(const T& key);
   private:
-    shared_ptr<Node> delet(shared_ptr<Node> nd, const T& key);
-    shared_ptr<Node> deleteMin(shared_ptr<Node>);
-    const int _rank(shared_ptr<Node> nd, const T& key) const;
-    shared_ptr<Node> _select(shared_ptr<Node> nd, int x) const;
-    shared_ptr<Node> _floor(shared_ptr<Node> x, const S& key) const;
-    shared_ptr<Node> _ceiling(shared_ptr<Node> x, const S&key) const;
-    shared_ptr<Node> _min(shared_ptr<Node> x) const;
-    shared_ptr<Node> _max(shared_ptr<Node> x) const;
-    shared_ptr<Node> _put(shared_ptr<Node> x, const S& key, const T& val);
-    const T _get(shared_ptr<Node> x,const S&) const;
-    void _show(shared_ptr<Node> x) const;
-    void _keys(vector<S>&, shared_ptr<Node> x) const;
-    shared_ptr<Node> head;
+    // shared_ptr<Node> delet(shared_ptr<Node> nd, const T& key);
+    // shared_ptr<Node> deleteMin(shared_ptr<Node>);
+    // const int _rank(shared_ptr<Node> nd, const T& key) const;
+    // shared_ptr<Node> _select(shared_ptr<Node> nd, int x) const;
+    shared_ptr<Node> floor(shared_ptr<Node> x, const S& key) const;
+    shared_ptr<Node> ceiling(shared_ptr<Node> x, const S&key) const;
+    shared_ptr<Node> min(shared_ptr<Node> x) const;
+    shared_ptr<Node> max(shared_ptr<Node> x) const;
+    shared_ptr<Node> put(shared_ptr<Node> x, const S& key, const T& val);
+    shared_ptr<Node> get(shared_ptr<Node> x,const S&) const;
+    void keys(vector<S>&, shared_ptr<Node> x,const S& min, const S& max) const;
+    shared_ptr<Node> root;
 };
 
 template<typename S, typename T>
-void BST<S,T>::put(const S& key, const T& val) {
-  head = _put(head, key, val);
+void BST<S,T>::put(const S& key, const T& val)
+{
+  root = put(root, key, val);
 }
 
 template<typename S, typename T>
 shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::_put(shared_ptr<Node> x, const S& key, const T& val) 
+BST<S,T>::put(shared_ptr<Node> h, const S& key, const T& val)
 {
-  if(!x) 
+  if(!h)
     return make_shared<Node>(key, val, 1);
-  int cmp = x->compareTo(key);
-  if(cmp > 0) x->left = _put(x->left, key, val); 
-  else if(cmp < 0) x->right = _put(x->right, key, val);
-  else x->val = val;
-  x->N = Node::Nsize(x->left) + Node::Nsize(x->right) + 1;
-  return x;
-}
-
-/**
- * > 1
- * = 0
- * < -1
- **/ 
-template<typename S, typename T>
-int BST<S,T>::Node::compareTo(shared_ptr<Node> node) const {
-  return compareTo(node->key);
-}
-
-template<typename S, typename T>
-int BST<S,T>::Node::compareTo(const S& key2) const {
-  return key > key2 ? 1 : key < key2 ? -1 : 0;
-}
-
-template<typename S, typename T>
-int BST<S,T>::Node::Nsize(shared_ptr<Node> x) {
-  if(!x) 
-    return 0;
-  else 
-    return x->N;
-}
-
-template<typename S, typename T>
-const T BST<S,T>::get(const S& key) const {
-  return _get(head, key);
-}
-
-template<typename S, typename T>
-const T BST<S,T>::_get(shared_ptr<Node> x,const S& key) const {
-  if(!x) 
-    return T();
-  int cmp = x->compareTo(key);
-  if(cmp > 0) return _get(x->right, key);
-  else if(cmp < 0) return _get(x->left, key);
-  else return x->val;
-}
-
-template<typename S, typename T>
-bool BST<S,T>::contain(const S& key) const {
-  return get(key) != T();
-}
-
-template<typename S, typename T>
-void BST<S,T>::show() const {
-  _show(head);
-}
-
-template<typename S, typename T>
-void BST<S,T>::_show(shared_ptr<Node> x) const {
-  if(!x) 
-    return ;
-  if(x->left) 
-    _show(x->left);
-  cout << x->key << " " << x->val << endl;
-  if(x->right)
-    _show(x->right);
-}
-
-template<typename S, typename T>
-const vector<S> BST<S,T>::keys() const {
-  vector<S> res;
-  _keys(res, head);
-  return res;
-}
-
-template<typename S, typename T>
-void BST<S,T>::_keys(vector<S>& res, shared_ptr<Node> x) const {
-  if(!x) 
-    return ;
-  res.push_back(x->key);
-  _keys(res,x->left);
-  _keys(res, x->right);
-}
-
-template<typename S, typename T>
-const S BST<S,T>::min() const {
-  if(!head) 
-    return S();
-  return _min(head)->key;
-}
-
-template<typename S, typename T>
-shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::_min(shared_ptr<Node> x) const 
-{
-  if(!x || !x->left)
-    return x;
-  else
-    return _min(x->left);
-}
-
-template<typename S, typename T>
-const S BST<S,T>::max() const {
-  if(!head) 
-    return S();
-  return _max(head)->key;
-}
-
-template<typename S, typename T>
-shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::_max(shared_ptr<Node> x) const 
-{
-  if(!x || !x->right)
-    return x;
-  else
-    return _max(x->right);
-}
-
-template<typename S, typename T>
-const S BST<S,T>::floor(const S& key) const {
-  shared_ptr<Node> nd = _floor(head, key);
-  if(!nd) return S();
-  return nd->key;
-}
-
-template<typename S, typename T>
-const S BST<S,T>::ceiling(const S&key) const {
-  shared_ptr<Node> nd = _ceiling(head, key);
-  if(!nd) return S();
-  return nd->key;
-}
-
-template<typename S, typename T>
-shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::_floor(shared_ptr<Node> x, const S& key) const 
-{
-  if(!x) return x;
-  int cmp = x->compareTo(key);
-  if(cmp == 0) return x;
-  else if (cmp > 0) return _floor(x->left, key);
-  shared_ptr<Node> y = _floor(x->right, key);
-  if(!y) return x;
-  return y;
-}
-
-template<typename S, typename T>
-shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::_ceiling(shared_ptr<Node> x, const S&key) const 
-{
-  if(!x) return x;
-  int cmp = x->compareTo(key);
-  if(!cmp) return x;
-  else if(cmp < 0) return _ceiling(x->right, key);
-  shared_ptr<Node> y = _ceiling(x->left, key);
-  if(!y) return x;
-  return y;
-}
-
-template<typename S, typename T>
-const S BST<S,T>::select(int x) const {
-  if(x < 0 || x >= head->N)
-    return S();
-  auto nd =  _select(head, x);
-  if(!nd) 
-    return S();
-  return nd->key;
-}
-
-template<typename S, typename T>
-shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::_select(shared_ptr<Node> nd, int x) const 
-{
-  if(!nd) 
-    return nd;
-  int nd_rank = Node::Nsize(nd->left);
-  if(nd_rank > x) 
-    return _select(nd->left, x);
-  else if (nd_rank < x)
-    return _select(nd->right, x - nd_rank - 1);
-  return nd;
-}
-
-template<typename S, typename T>
-const int BST<S,T>::rank(const T& key) const {
-  int rk = _rank(head, key);
-  // if(select(rk) != key)
-  //   return -1;
-  return rk;
-}
-
-template<typename S, typename T>
-const int BST<S,T>::_rank(shared_ptr<Node> nd, const T& key) const 
-{
-  if(!nd) return 0;
-  int nd_rank = Node::Nsize(nd->left);
-  if(nd->key < key) 
-    return nd_rank + 1 + _rank(nd->right, key);
-  else if(nd->key > key) 
-    return _rank(nd->left, key);
-  return nd_rank;
-}
-
-/**
- * 这个函数只能删除根节点左边的
- **/ 
-template<typename S, typename T>
-void BST<S,T>::deleteMin() {
-  deleteMin(head);
-}
-
-template<typename S, typename T>
-shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::deleteMin(shared_ptr<Node> x) 
-{
-  if(!x->left)
-    return x->right;
-  x->left = deleteMin(x->left);
-  x->N = Node::Nsize(x->left) + Node::Nsize(x->right) + 1;
-  return x;
-}
-
-template<typename S, typename T>
-void BST<S,T>::delet(const T& key) {
-  head = delet(head, key);
-}
-
-template<typename S, typename T>
-shared_ptr<typename BST<S,T>::Node> 
-BST<S,T>::delet(shared_ptr<Node> nd, const T& key)
-{
-  if(!nd) {
-    return nd;
-  }
-  int cmp = nd->compareTo(key);
-  if(cmp < 0) 
-  {
-    nd->right = delet(nd->right, key);
-  } else if(cmp > 0) {
-    nd ->left = delet(nd->left, key);
+  int cmp = h->compareTo(key);
+  if(cmp > 0) {
+    h->left = put(h->left, key, val);
+  } else if (cmp < 0) {
+    h->right = put(h->right, key, val);
   } else {
-    if(!nd->left) return nd->right;
-    if(!nd->right) return nd->left;
-    auto minO = _min(nd->right);
-    minO->right = deleteMin(nd->right);
-    minO->left = nd->left;
-    nd = minO;
+    h->val = val;
   }
-  nd->N = Node::Nsize(nd->left) + Node::Nsize(nd->right) + 1;
-  return nd;
+  h->N = Node::Nsize(h->left) + Node::Nsize(h->right) + 1;
+  return h;
+}
+
+template<typename S, typename T>
+int 
+/**
+ * BST<S,T>::Node::compareTo 
+ * 
+ * @param  {S} key : 
+ * @return {int} >key 1，
+ *               <key -1
+ *               =key 0
+ */
+BST<S,T>::Node::compareTo(const S& key) const 
+{
+  if(this->key > key)
+    return 1;
+  else if (this->key < key)
+    return -1;
+  return 0;
+}
+
+template<typename S, typename T>
+int 
+BST<S,T>::Node::Nsize(shared_ptr<Node> h) 
+{
+  if(!h)
+    return 0;
+  return h->N;
+}
+
+template<typename S, typename T>
+T BST<S,T>::get(const S& key) const
+{
+  auto h = get(root, key);
+  if(!h)
+    return T();
+  return h->val;
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node>
+BST<S,T>::get(shared_ptr<Node> h,const S& key) const
+{
+  if(!h)
+    return nullptr;
+  int cmp = h->compareTo(key);
+  if(cmp > 0) {
+    return get(h->left, key);
+  } else if (cmp < 0) {
+    return get(h->right, key);
+  } else {
+    return h;
+  }
+}
+
+template<typename S, typename T>
+vector<S> BST<S,T>::keys(const S& min, const S& max) const
+{
+  vector<S> vec;
+  keys(vec, root, min, max);
+  return vec;
+}
+
+template<typename S, typename T>
+void 
+BST<S,T>::keys(vector<S>& vec, shared_ptr<Node> h, const S& min, const S& max) const
+{
+  if(!h)  
+    return ;
+  int cmp1 = h->compareTo(min),
+    cmp2 = h->compareTo(max);
+  if(cmp1 >= 0 && cmp2 <= 0) 
+    vec.push_back(h->key);
+  if(cmp1 >= 0)
+    keys(vec, h->left, min, max);
+  if(cmp2 <= 0)
+    keys(vec, h->right, min, max);  
+}
+
+template<typename S, typename T>
+S BST<S,T>::min() const
+{
+  if(!root)
+    return S();
+  auto h = min(root);
+  return h->key;
+}
+
+template<typename S, typename T>
+S BST<S,T>::max() const 
+{
+  if(!root)
+    return S();
+  auto h = max(root);
+  return h->key;
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::min(shared_ptr<Node> h) const
+{
+  if(!h->left)
+    return h;
+  return min(h->left);
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::max(shared_ptr<Node> h) const
+{
+  if(!h->right)
+    return h;
+  return max(h->right);
+}
+
+template<typename S, typename T>
+vector<S> BST<S,T>::keys() const
+{
+  return keys(min(), max());
+}
+
+#ifdef DEBUG
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::get(const S& key, int) const
+{
+  auto h = get(root, key);
+  return h;
+}
+#endif
+
+template<typename S, typename T>
+bool BST<S,T>::contain(const S& key) const
+{
+  return get(root, key) != nullptr;
+}
+
+template<typename S, typename T>
+S BST<S,T>::floor(const S& key) const
+{
+  if(!root)
+    return S();
+  auto h = floor(root, key);
+  if(!h)
+    return S();
+  return h->key;
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::floor(shared_ptr<Node> h, const S& key) const
+{
+  if(!h)
+    return nullptr;
+  int cmp = h->compareTo(key);
+  shared_ptr<Node> n;
+  if(cmp < 0) {
+    n = floor(h->right, key);
+    return n ? n : h;
+  } else if (cmp > 0) {
+    return floor(h->left, key);
+  } else {
+    return h;
+  }
+}
+
+template<typename S, typename T>
+S BST<S,T>::ceiling(const S&key) const
+{
+  if(!root)
+    return S();
+  auto h = ceiling(root, key);
+  if(!h)
+    return S();
+  return h->key;
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::ceiling(shared_ptr<Node> h, const S&key) const
+{
+  // if(!h)
+  //   return nullptr;
+  // int cmp = h->compareTo(key);
+  // if(cmp < 0) {
+  //   auto n = ceiling(h->right, key);
+  //   return n ? n : h;
+  // } else if(cmp > 0) {
+  //   return ceiling(h->left, key);
+  // } else {
+  //   return h;
+  // }
 }
