@@ -1,8 +1,8 @@
 /*
  * @Author: xiao gongbai 
  * @Date: 2020-01-14 23:20:44 
- * @Last Modified by: xiao gongbai
- * @Last Modified time: 2020-01-15 02:44:08
+ * @Last Modified by: XiaoGongBai
+ * @Last Modified time: 2020-01-16 01:12:19
  */
 #define CATCH_CONFIG_MAIN  
 #include "catch.hpp"
@@ -12,6 +12,9 @@
 #include <string>
 using namespace std;
 
+/**
+ * 二叉查找树的单元测试
+ **/ 
 TEST_CASE("put", "[BST]") {
   BST<char, char> bst;
   SECTION("case 1") {
