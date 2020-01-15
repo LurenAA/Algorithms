@@ -43,15 +43,17 @@ class BST{
     vector<S> keys() const;
     S floor(const S& key) const;
     S ceiling(const S&key) const;
-    // const S select(int x) const;
-    // const int rank(const T&) const;
-    // void deleteMin();
-    // void delet(const T& key);
+    const S select(int x) const;
+    int rank(const T&) const;
+    void deleteMin();
+    void deleteMax();
+    void delet(const T& key);
   private:
-    // shared_ptr<Node> delet(shared_ptr<Node> nd, const T& key);
-    // shared_ptr<Node> deleteMin(shared_ptr<Node>);
-    // const int _rank(shared_ptr<Node> nd, const T& key) const;
-    // shared_ptr<Node> _select(shared_ptr<Node> nd, int x) const;
+    shared_ptr<Node> delet(shared_ptr<Node> nd, const T& key);
+    shared_ptr<Node> deleteMax(shared_ptr<Node>);
+    shared_ptr<Node> deleteMin(shared_ptr<Node>);
+    int rank(shared_ptr<Node> h, const T& key) const;
+    shared_ptr<Node> select(shared_ptr<Node> h, int x) const;
     shared_ptr<Node> floor(shared_ptr<Node> x, const S& key) const;
     shared_ptr<Node> ceiling(shared_ptr<Node> x, const S&key) const;
     shared_ptr<Node> min(shared_ptr<Node> x) const;
@@ -265,15 +267,137 @@ template<typename S, typename T>
 shared_ptr<typename BST<S,T>::Node> 
 BST<S,T>::ceiling(shared_ptr<Node> h, const S&key) const
 {
-  // if(!h)
-  //   return nullptr;
-  // int cmp = h->compareTo(key);
-  // if(cmp < 0) {
-  //   auto n = ceiling(h->right, key);
-  //   return n ? n : h;
-  // } else if(cmp > 0) {
-  //   return ceiling(h->left, key);
-  // } else {
-  //   return h;
-  // }
+  if(!h)
+    return nullptr;
+  int cmp = h->compareTo(key);
+  if(cmp < 0)
+    return ceiling(h->right, key);
+  else if (!cmp) 
+    return h;
+  auto n = ceiling(h->left, key);
+  if(!n)
+    return h;
+  return n;
+}
+
+template<typename S, typename T>
+const S BST<S,T>::select(int x) const
+{
+  if(x < 0 || x >= size())
+    return S();
+  auto h = select(root, x);
+  return h->key;
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::select(shared_ptr<Node> h, int x) const
+{
+  int rank = Node::Nsize(h->left);
+  if(rank > x) {
+    return select(h->left, x);
+  } else if(rank < x) {
+    return select(h->right, x - rank - 1);
+  } else {
+    return h;
+  }
+}
+
+template<typename S, typename T>
+int 
+BST<S,T>::rank(shared_ptr<Node> h, const T& key) const
+{
+  if(!h)
+    return 0;
+  int cmp = h->compareTo(key);
+  if(cmp > 0) 
+  {
+    return rank(h->left, key);
+  } 
+  else if (cmp < 0) 
+  {
+    return Node::Nsize(h->left) + rank(h->right, key) + 1;
+  } 
+  else
+  {
+    return Node::Nsize(h->left);
+  } 
+}
+
+template<typename S, typename T>
+int 
+BST<S,T>::rank(const T& key) const
+{
+  return rank(root, key);
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::deleteMin(shared_ptr<Node> h)
+{
+  if(!h->left)
+    return h->right;
+  h->left = deleteMin(h->left);
+  h->N = Node::Nsize(h->left) + Node::Nsize(h->right) + 1;
+  return h;
+}
+
+template<typename S, typename T>
+void 
+BST<S,T>::deleteMin()
+{
+  if(!size())
+    return ;
+  root = deleteMin(root);
+}
+
+template<typename S, typename T>
+void BST<S,T>::deleteMax()
+{
+  if(!size())
+    return ;
+  root = deleteMax(root);
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::deleteMax(shared_ptr<Node> h)
+{
+  if(!h->right)
+    return h->left;
+  h->right = deleteMax(h->right);
+  h->N = Node::Nsize(h->left) + Node::Nsize(h->right) + 1;
+  return h;
+}
+
+template<typename S, typename T>
+void BST<S,T>::delet(const T& key)
+{
+  if(!size())
+    return ;
+  root = delet(root, key);
+}
+
+template<typename S, typename T>
+shared_ptr<typename BST<S,T>::Node> 
+BST<S,T>::delet(shared_ptr<Node> h, const T& key)
+{
+  if(!h)
+    return nullptr;
+  int cmp = h->compareTo(key);
+  if(cmp < 0) {
+    h->right = delet(h->right, key);
+  } else if (cmp > 0) {
+    h->left = delet(h->left, key);
+  } else {
+    if(!h->right) return h->left;
+    if(!h->left) return h->right;
+    auto min_r = min(h->right);
+    h->right = deleteMin(h->right);
+    min_r->left = h->left;
+    min_r->right = h->right;
+    h = min_r;
+  }
+  h->N = Node::Nsize(h->left) + Node::Nsize(h->right) + 1;
+  return h;
 }
