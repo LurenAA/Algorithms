@@ -30,3 +30,5 @@
 &emsp;[二叉查找树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/BST.hpp)<br />
 &emsp;[红黑树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/RedBlackBST.hpp)<br />
 &emsp;[AVL树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/AvlTree.hpp)<br />
+&emsp;[拉链法的散列表](https://github.com/LurenAA/Algorithms/blob/master/chapter3/SeparateChainingHashST.hpp)<br />
+&emsp;[线性探测法的散列表](https://github.com/LurenAA/Algorithms/blob/master/chapter3/LinearProbingHashST.hpp)<br />
