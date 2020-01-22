@@ -29,3 +29,4 @@
 &emsp;[数组（二分查找）](https://github.com/LurenAA/Algorithms/blob/master/chapter3/BinarySearchST.hpp)<br />
 &emsp;[二叉查找树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/BST.hpp)<br />
 &emsp;[红黑树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/RedBlackBST.hpp)<br />
+&emsp;[AVL树](https://github.com/LurenAA/Algorithms/blob/master/chapter3/AvlTree.hpp)<br />

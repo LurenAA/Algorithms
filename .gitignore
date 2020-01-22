@@ -13,3 +13,4 @@ CMakeList*
 main.cpp
 *.a
 .gitignore
+tale*
