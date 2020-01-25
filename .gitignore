@@ -13,4 +13,5 @@ CMakeList*
 main.cpp
 *.a
 .gitignore
-tale*
+tale.txt
+tinyG.txt
