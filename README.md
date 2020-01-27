@@ -37,3 +37,6 @@
 &emsp;[无向图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Graph.hpp)<br />
 &emsp;[DFS](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DepthFirstSearch.hpp)<br />
 &emsp;[DFS寻找路径](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DepthFirstPaths.hpp)<br />
+&emsp;[DFS连通分量](https://github.com/LurenAA/Algorithms/blob/master/chapter4/CC.hpp)<br />
+&emsp;[BFS](https://github.com/LurenAA/Algorithms/blob/master/chapter4/BreadthFirstPaths.hpp)<br />
+&emsp;[符号图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/SymbolGraph.hpp)<br />
