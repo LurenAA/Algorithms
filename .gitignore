@@ -14,5 +14,5 @@ main.cpp
 *.a
 .gitignore
 tale.txt
-tinyG.txt
+tiny*.txt
 routes.txt

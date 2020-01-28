@@ -40,3 +40,6 @@
 &emsp;[DFS连通分量](https://github.com/LurenAA/Algorithms/blob/master/chapter4/CC.hpp)<br />
 &emsp;[BFS](https://github.com/LurenAA/Algorithms/blob/master/chapter4/BreadthFirstPaths.hpp)<br />
 &emsp;[符号图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/SymbolGraph.hpp)<br />
+&emsp;[有向图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Digraph.hpp)<br />
+&emsp;[有向图DFS](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DirectedDFS.hpp)<br />
+&emsp;[寻找有向环](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DirectedCycle.hpp)<br />

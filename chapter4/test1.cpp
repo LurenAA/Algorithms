@@ -2,15 +2,19 @@
  * @Author: XiaoGongBai 
  * @Date: 2020-01-25 14:40:47 
  * @Last Modified by: XiaoGongBai
- * @Last Modified time: 2020-01-27 17:09:41
+ * @Last Modified time: 2020-01-28 22:56:14
  */
 #define CATCH_CONFIG_MAIN  
 #include "catch.hpp"
 #include "Common.hpp"
+#include "DepthFirstOrder.hpp"
 #include "Graph.hpp"
 #include "DepthFirstSearch.hpp"
 #include "DepthFirstPaths.hpp"
 #include "BreadthFirstPaths.hpp"
+#include "DirectedCycle.hpp"
+#include "Digraph.hpp"
+#include "DirectedDFS.hpp"
 #include "CC.hpp"
 #include <vector>
 #include <string>
@@ -103,4 +107,28 @@ TEST_CASE("dfs") {
       REQUIRE(bfs.pathTo(4) == stk);
     }
   }
+}
+
+
+TEST_CASE("有向图")
+{
+  Digraph d("tinyDG.txt");
+  REQUIRE(d.adj(0) == list<int>{1, 5});
+  REQUIRE(d.adj(2) == list<int>{3,0});
+  REQUIRE(d.adj(3) == list<int>{2,5});
+  Digraph rd = d.reverse();
+  REQUIRE(rd.adj(0).size() == 2);
+  DirectedDFS dfs(d, 0);
+  REQUIRE(dfs.getMarked(1) == true);
+  REQUIRE(dfs.getMarked(5) == true);
+  REQUIRE(dfs.getMarked(2) == true);
+  REQUIRE(dfs.getMarked(3) == true);
+  REQUIRE(dfs.getMarked(4) == true);
+  REQUIRE(dfs.getMarked(6) == false);
+  DirectedCycle ddc(d);
+  REQUIRE(ddc.cycles.size() == 5);
+  DepthFirstOrder odr(d);
+  REQUIRE(odr.getPost().size() == 13);
+  REQUIRE(odr.getPre().size() == 13);
+  REQUIRE(odr.getReversePost().size() == 13);
 }
