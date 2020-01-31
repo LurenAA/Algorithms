@@ -43,3 +43,4 @@
 &emsp;[有向图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Digraph.hpp)<br />
 &emsp;[有向图DFS](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DirectedDFS.hpp)<br />
 &emsp;[寻找有向环](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DirectedCycle.hpp)<br />
+&emsp;[Kosaraju](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Kosaraju.hpp)<br />

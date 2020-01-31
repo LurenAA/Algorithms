@@ -2,7 +2,7 @@
  * @Author: XiaoGongBai 
  * @Date: 2020-01-25 14:40:47 
  * @Last Modified by: XiaoGongBai
- * @Last Modified time: 2020-01-28 22:56:14
+ * @Last Modified time: 2020-01-31 22:00:19
  */
 #define CATCH_CONFIG_MAIN  
 #include "catch.hpp"
@@ -18,6 +18,7 @@
 #include "CC.hpp"
 #include <vector>
 #include <string>
+#include "Kosaraju.hpp"
 #include "SymbolGraph.hpp"
 using namespace std;
 
@@ -131,4 +132,9 @@ TEST_CASE("有向图")
   REQUIRE(odr.getPost().size() == 13);
   REQUIRE(odr.getPre().size() == 13);
   REQUIRE(odr.getReversePost().size() == 13);
+  Kosaraju koj(d);
+  REQUIRE(koj.stronglyConnected(2, 3));
+  REQUIRE(koj.stronglyConnected(3 ,5));
+  REQUIRE(koj.stronglyConnected(7 ,8));
+  REQUIRE(koj.stronglyConnected(9 ,11));
 }
