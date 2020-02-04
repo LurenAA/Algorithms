@@ -44,3 +44,5 @@
 &emsp;[有向图DFS](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DirectedDFS.hpp)<br />
 &emsp;[寻找有向环](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DirectedCycle.hpp)<br />
 &emsp;[Kosaraju](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Kosaraju.hpp)<br />
+&emsp;[加权边](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Edge.hpp)<br />
+&emsp;[加权无向图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/EdgeWeightedGraph.hpp)<br />

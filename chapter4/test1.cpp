@@ -2,7 +2,7 @@
  * @Author: XiaoGongBai 
  * @Date: 2020-01-25 14:40:47 
  * @Last Modified by: XiaoGongBai
- * @Last Modified time: 2020-01-31 22:00:19
+ * @Last Modified time: 2020-02-04 23:15:19
  */
 #define CATCH_CONFIG_MAIN  
 #include "catch.hpp"
@@ -19,7 +19,9 @@
 #include <vector>
 #include <string>
 #include "Kosaraju.hpp"
+#include "EdgeWeightedGraph.hpp"
 #include "SymbolGraph.hpp"
+#include "LazyPrimMST.hpp"
 using namespace std;
 
 /**
@@ -137,4 +139,20 @@ TEST_CASE("有向图")
   REQUIRE(koj.stronglyConnected(3 ,5));
   REQUIRE(koj.stronglyConnected(7 ,8));
   REQUIRE(koj.stronglyConnected(9 ,11));
+}
+
+TEST_CASE("EdgeWeightedGraph")
+{
+  EdgeWeightedGraph g("tinyEWG.txt");
+  REQUIRE(g.E() == 16);
+  REQUIRE(g.V() == 8);
+  REQUIRE(g.edges().size() == 16);
+  REQUIRE(g.adj(0).size() == 4);
+  REQUIRE(g.adj(1).size() == 4);
+  REQUIRE(g.adj(2).size() == 5);
+  REQUIRE(g.adj(3).size() == 3);
+  LazyPrimMST lpm(g);
+  queue<Edge<int> > egs = lpm.edges();
+  REQUIRE(egs.size() == 7);
+  REQUIRE(lpm.weight() == 1.81);
 }
