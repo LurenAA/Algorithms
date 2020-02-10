@@ -2,7 +2,7 @@
  * @Author: XiaoGongBai 
  * @Date: 2020-01-25 14:40:47 
  * @Last Modified by: XiaoGongBai
- * @Last Modified time: 2020-02-04 23:15:19
+ * @Last Modified time: 2020-02-10 23:30:16
  */
 #define CATCH_CONFIG_MAIN  
 #include "catch.hpp"
@@ -22,6 +22,7 @@
 #include "EdgeWeightedGraph.hpp"
 #include "SymbolGraph.hpp"
 #include "LazyPrimMST.hpp"
+#include "PrimMST.hpp"
 using namespace std;
 
 /**
@@ -154,5 +155,7 @@ TEST_CASE("EdgeWeightedGraph")
   LazyPrimMST lpm(g);
   queue<Edge<int> > egs = lpm.edges();
   REQUIRE(egs.size() == 7);
-  REQUIRE(lpm.weight() == 1.81);
+  REQUIRE(abs(lpm.weight() - 1.81) < 1e-6);
+  PrimMST lpm2(g);
+  REQUIRE(abs(lpm2.weight() - 1.81) < 1e-6);
 }

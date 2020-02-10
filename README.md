@@ -22,7 +22,7 @@
 &emsp;[优先队列（二叉堆）](https://github.com/LurenAA/Algorithms/blob/master/chapter2/MaxPQ.cpp)<br />
 &emsp;[优先队列（无序数组）](https://github.com/LurenAA/Algorithms/blob/master/chapter2/UnOrderArrayMaxPQ.cpp)<br />
 &emsp;[优先队列（有序数组）](https://github.com/LurenAA/Algorithms/blob/master/chapter2/OrderArrayMaxPQ.cpp)<br />
-&emsp;[索引最小优先队列](https://github.com/LurenAA/Algorithms/blob/master/chapter2/IndexMinPQ.cpp)<br />
+&emsp;[索引最小优先队列](https://github.com/LurenAA/Algorithms/blob/master/chapter2/IndexMinPQ.hpp)<br />
 
 ### 第3章 查找
 &emsp;[链表](https://github.com/LurenAA/Algorithms/blob/master/chapter3/SequentialSearchST.hpp)<br />
@@ -46,3 +46,5 @@
 &emsp;[Kosaraju](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Kosaraju.hpp)<br />
 &emsp;[加权边](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Edge.hpp)<br />
 &emsp;[加权无向图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/EdgeWeightedGraph.hpp)<br />
+&emsp;[Prim算法](https://github.com/LurenAA/Algorithms/blob/master/chapter4/PrimMST.hpp)<br />
+&emsp;[Prim算法2](https://github.com/LurenAA/Algorithms/blob/master/chapter4/LazyPrimMST.hpp)<br />

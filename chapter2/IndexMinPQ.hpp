@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <algorithm>
 #include  <functional>
@@ -41,10 +42,10 @@ IndexMinPQ<T>::IndexMinPQ(int max) :
 
 template<typename T>
 void IndexMinPQ<T>::sink(int n){
-  while(n < N) {
+  while(2 * n <= N) {
     int m = n * 2;
-    if(element[pq[m]] > element[pq[m + 1]]) ++m;
-    if(element[pq[m]] < element[pq[n]]) break;
+    if(m + 1 <= N && element[pq[m]] > element[pq[m + 1]]) ++m;
+    if(element[pq[m]] >= element[pq[n]]) break;
     swap(pq[m], pq[n]);
     swap(qp[pq[m]], qp[pq[n]]);
     n = m;
@@ -110,27 +111,27 @@ void IndexMinPQ<T>::change(int k, T item) {
 
 template<typename T>
 int IndexMinPQ<T>::delMin() {
-  int max = pq[1];
+  int min = pq[1];
   swap(pq[1], pq[N]);
   swap(qp[pq[1]], qp[pq[N]]);
   --N;
-  show();
+  // show();
   sink(1);
-  show();
-  qp[max] = -1;
-  element[max] = -1;
+  // show();
+  qp[min] = -1;
+  element[min] = -1;
   pq[N + 1] = -1;
-  return max;
+  return min;
 }
 
-int main(int argc, char** argv) {
-  IndexMinPQ<int> pq(6);
-  vector<int> v = Common::getInstance()->getRandomVector(6);
-  for(size_t i = 0; i < v.size(); ++i) {
-    pq.insert(i + 1, v[i]);
-  }
-  pq.show();
-  pq.delMin();
-  pq.show();
-  return 0;
-}
+// int main(int argc, char** argv) {
+//   IndexMinPQ<int> pq(6);
+//   vector<int> v = Common::getInstance()->getRandomVector(6);
+//   for(size_t i = 0; i < v.size(); ++i) {
+//     pq.insert(i + 1, v[i]);
+//   }
+//   pq.show();
+//   pq.delMin();
+//   pq.show();
+//   return 0;
+// }
