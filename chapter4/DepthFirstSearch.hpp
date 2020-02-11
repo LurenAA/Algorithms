@@ -2,7 +2,7 @@
  * @Author: XiaoGongBai 
  * @Date: 2020-01-25 18:23:46 
  * @Last Modified by: XiaoGongBai
- * @Last Modified time: 2020-01-25 19:14:37
+ * @Last Modified time: 2020-02-11 11:16:31
  */
 #pragma once
 #include <list>
@@ -34,6 +34,8 @@ DepthFirstSearch::DepthFirstSearch(Graph& g, int i)
   : count(0)
 {
   marked = new bool [g.V()];
+  for(int i = 0; i < g.V(); ++i)
+    marked[i] = false;
   dfs(g, i);
 }
 

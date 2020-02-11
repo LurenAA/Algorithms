@@ -23,6 +23,7 @@
 #include "SymbolGraph.hpp"
 #include "LazyPrimMST.hpp"
 #include "PrimMST.hpp"
+#include "Kruskal.hpp"
 using namespace std;
 
 /**
@@ -158,4 +159,6 @@ TEST_CASE("EdgeWeightedGraph")
   REQUIRE(abs(lpm.weight() - 1.81) < 1e-6);
   PrimMST lpm2(g);
   REQUIRE(abs(lpm2.weight() - 1.81) < 1e-6);
+  Kruskal kk(g);
+  REQUIRE(abs(kk.weight() - 1.81) < 1e-6);
 }

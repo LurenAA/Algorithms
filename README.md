@@ -4,6 +4,10 @@
 >这个项目包含《算法第4版》书中的部分代码和本人的实现。希望能和大家交流学习，炒鸡感谢哒！🐶
 
 
+|           算法第4版           |  
+| :----------------------------: | 
+| ![算法第4版](https://bkimg.cdn.bcebos.com/pic/3b292df5e0fe9925679fe8a53ea85edf8cb171b0?x-bce-process=image/resize,m_lfit,w_268,limit_1/format,f_jpg) | 
+
 目录
 ----
 
@@ -48,3 +52,4 @@
 &emsp;[加权无向图](https://github.com/LurenAA/Algorithms/blob/master/chapter4/EdgeWeightedGraph.hpp)<br />
 &emsp;[Prim算法](https://github.com/LurenAA/Algorithms/blob/master/chapter4/PrimMST.hpp)<br />
 &emsp;[Prim算法2](https://github.com/LurenAA/Algorithms/blob/master/chapter4/LazyPrimMST.hpp)<br />
+&emsp;[Kruskal算法](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Kruskal.hpp)<br />
