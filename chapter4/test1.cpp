@@ -2,7 +2,7 @@
  * @Author: XiaoGongBai 
  * @Date: 2020-01-25 14:40:47 
  * @Last Modified by: XiaoGongBai
- * @Last Modified time: 2020-02-10 23:30:16
+ * @Last Modified time: 2020-02-12 22:25:22
  */
 #define CATCH_CONFIG_MAIN  
 #include "catch.hpp"
@@ -24,6 +24,9 @@
 #include "LazyPrimMST.hpp"
 #include "PrimMST.hpp"
 #include "Kruskal.hpp"
+#include "EdgeWeightDigraph.hpp"
+#include "DijkstraSP.hpp"
+#include "BellmanFord.hpp"
 using namespace std;
 
 /**
@@ -161,4 +164,39 @@ TEST_CASE("EdgeWeightedGraph")
   REQUIRE(abs(lpm2.weight() - 1.81) < 1e-6);
   Kruskal kk(g);
   REQUIRE(abs(kk.weight() - 1.81) < 1e-6);
+}
+
+TEST_CASE("4.4")
+{ 
+  EdgeWeightDigraph g("tinyEWD.txt");
+
+  SECTION("DijkstraSP") {
+    DijkstraSP dj(g, 0);
+    vector<DirectedEdge> djv = dj.pathTo(1);
+    REQUIRE(djv[0] == DirectedEdge(0, 4, 0.38));
+    REQUIRE(djv[1] == DirectedEdge(4, 5, 0.35));
+    REQUIRE(djv[2] == DirectedEdge(5, 1, 0.32));
+    REQUIRE(dj.pathTo(2).size() == 1);
+    REQUIRE(dj.pathTo(3).size() == 3);
+    auto djv2 = dj.pathTo(6);
+    REQUIRE(djv2[0] == DirectedEdge(0, 2, 0.26));
+    REQUIRE(djv2[1] == DirectedEdge(2, 7, 0.34));
+    REQUIRE(djv2[2] == DirectedEdge(7, 3, 0.39));
+    REQUIRE(djv2[3] == DirectedEdge(3, 6, 0.52));
+  }
+
+  SECTION("BellmanFord") {
+    BellmanFord dj(g, 0);
+    vector<DirectedEdge> djv = dj.pathTo(1);
+    REQUIRE(djv[0] == DirectedEdge(0, 4, 0.38));
+    REQUIRE(djv[1] == DirectedEdge(4, 5, 0.35));
+    REQUIRE(djv[2] == DirectedEdge(5, 1, 0.32));
+    REQUIRE(dj.pathTo(2).size() == 1);
+    REQUIRE(dj.pathTo(3).size() == 3);
+    auto djv2 = dj.pathTo(6);
+    REQUIRE(djv2[0] == DirectedEdge(0, 2, 0.26));
+    REQUIRE(djv2[1] == DirectedEdge(2, 7, 0.34));
+    REQUIRE(djv2[2] == DirectedEdge(7, 3, 0.39));
+    REQUIRE(djv2[3] == DirectedEdge(3, 6, 0.52));
+  }
 }

@@ -53,3 +53,7 @@
 &emsp;[Prim算法](https://github.com/LurenAA/Algorithms/blob/master/chapter4/PrimMST.hpp)<br />
 &emsp;[Prim算法2](https://github.com/LurenAA/Algorithms/blob/master/chapter4/LazyPrimMST.hpp)<br />
 &emsp;[Kruskal算法](https://github.com/LurenAA/Algorithms/blob/master/chapter4/Kruskal.hpp)<br />
+&emsp;[Dijkstra](https://github.com/LurenAA/Algorithms/blob/master/chapter4/DijkstraSP.hpp)<br />
+&emsp;[BellmanFord](https://github.com/LurenAA/Algorithms/blob/master/chapter4/BellmanFord.hpp)<br />
+
+### 第5章 字符串
