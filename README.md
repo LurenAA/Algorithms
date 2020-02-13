@@ -57,3 +57,8 @@
 &emsp;[BellmanFord](https://github.com/LurenAA/Algorithms/blob/master/chapter4/BellmanFord.hpp)<br />
 
 ### 第5章 字符串
+&emsp;[高位优先的字符串排序](https://github.com/LurenAA/Algorithms/blob/master/chapter5/MSD.hpp)<br />
+&emsp;[低位优先的字符串排序](https://github.com/LurenAA/Algorithms/blob/master/chapter5/LSD.hpp)<br />
+&emsp;[三向字符串快速排序](https://github.com/LurenAA/Algorithms/blob/master/chapter5/Quick3string.hpp)<br />
+&emsp;[trie](https://github.com/LurenAA/Algorithms/blob/master/chapter5/TrieST.hpp)<br />
+&emsp;[暴力子字符串查找](https://github.com/LurenAA/Algorithms/blob/master/chapter5/BLsearch.hpp)<br />
