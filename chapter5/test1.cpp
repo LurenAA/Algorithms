@@ -2,7 +2,7 @@
  * @Author: XiaoGongBai 
  * @Date: 2020-02-13 10:30:43 
  * @Last Modified by: XiaoGongBai
- * @Last Modified time: 2020-02-13 23:58:23
+ * @Last Modified time: 2020-02-14 21:17:39
  */
 #define CATCH_CONFIG_MAIN  
 #include "catch.hpp"
@@ -11,7 +11,9 @@
 #include "MSD.hpp"
 #include "Quick3string.hpp"
 #include "TrieST.hpp"
+#include "Kmp.hpp"
 #include "BLsearch.hpp"
+#include "BoyerMoore.hpp"
 using namespace std;
 
 /**
@@ -70,4 +72,8 @@ TEST_CASE("5.2"){
 
 TEST_CASE("5.3"){
   REQUIRE(BLsearch::search("AAAAE","AAAAAAAAAE") == 5);
+  Kmp kmp("ABABAC");
+  REQUIRE(kmp.search("BCBAABACAABABACAA") == 9);
+  BoyerMoore bym("ABABAC");
+  REQUIRE(bym.search("BCBAABACAABABACAA") == 9);
 }

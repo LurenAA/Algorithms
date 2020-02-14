@@ -62,3 +62,5 @@
 &emsp;[三向字符串快速排序](https://github.com/LurenAA/Algorithms/blob/master/chapter5/Quick3string.hpp)<br />
 &emsp;[trie](https://github.com/LurenAA/Algorithms/blob/master/chapter5/TrieST.hpp)<br />
 &emsp;[暴力子字符串查找](https://github.com/LurenAA/Algorithms/blob/master/chapter5/BLsearch.hpp)<br />
+&emsp;[kmp](https://github.com/LurenAA/Algorithms/blob/master/chapter5/Kmp.hpp)<br />
+&emsp;[BoyerMoore](https://github.com/LurenAA/Algorithms/blob/master/chapter5/BoyerMoore.hpp)<br />
